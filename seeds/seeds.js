@@ -5,7 +5,8 @@ const album_data = require("./data/album-data");
 const song_data = require("./data/song-data");
 const user_data = require("./data/user-data");
 
-db.once("open", async () => {
+// db.once("open", async () => {
+const seedDB = async () => {
   await Song.deleteMany();
   await Album.deleteMany();
   await Artist.deleteMany();
@@ -99,5 +100,6 @@ db.once("open", async () => {
 
   const lookUp = await Artist.find({ name: "Gunna" });
   console.log("Seeded complete");
-  process.exit();
-});
+};
+
+module.exports = seedDB;
