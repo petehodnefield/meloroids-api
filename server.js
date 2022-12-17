@@ -18,7 +18,7 @@ const server = new ApolloServer({
   context: authMiddleware,
   introspection: true,
 });
-//
+
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
@@ -51,6 +51,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
       );
     });
   });
+  console.log(process.env.NODE_ENV);
 };
 
 // Call the async function to start the server
