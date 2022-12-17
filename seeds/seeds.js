@@ -68,7 +68,6 @@ const seedDB = async () => {
   // song seeding
   const matchSongToArtist = (song) => {
     const artist = createdArtist.forEach((artist) => {
-      console.log(song.artist_name, artist.name);
       const artistPair = song.artist_name;
       if (artistPair === artist.name) {
         updateArtistAndSong(artist._id, song._id);

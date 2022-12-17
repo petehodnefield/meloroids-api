@@ -7,7 +7,6 @@ const { typeDefs, resolvers } = require("./schemas");
 const { authMiddleware } = require("./utils/auth");
 const db = require("./config/connection");
 const seedDB = require("./seeds/seeds");
-const cors = require("cors");
 
 const PORT = process.env.PORT || 3001;
 // create a new Apollo server and pass in our schema data
@@ -24,7 +23,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cors({ origin: ["https://meloroids-api.onrender.com"] }));
+
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
@@ -41,6 +40,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
   });
+  console.log(__dirname);
   db.once("open", async () => {
     await seedDB();
     app.listen(PORT, () => {
