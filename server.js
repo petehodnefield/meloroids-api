@@ -39,7 +39,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
     app.use(express.static(path.join(__dirname, "../frontend/build")));
   }
   app.get("*", (req, res) => {
-    res.sendFile(path.join("./index.html"));
+    res.sendFile(path.join(__dirname, "./index.html"));
   });
   console.log(path.join(__dirname, "../frontend/build/index.html"));
   db.once("open", async () => {
