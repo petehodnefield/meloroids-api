@@ -36,15 +36,14 @@ const startApolloServer = async (typeDefs, resolvers) => {
     express.static(path.join(__dirname, "../frontend/images"))
   );
   if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "build", "index.html")));
+    app.use(express.static(path.join(__dirname, "../frontend/build")));
   }
-  app.get("*", function (req, res) {
-    const index = path.join(__dirname, "build", "index.html");
-    res.sendFile(index);
+  app.get("*", (req, res) => {
+    res.sendFile(path.join("./index.html"));
   });
-  console.log(__dirname);
+  console.log(path.join(__dirname, "../frontend/build/index.html"));
   db.once("open", async () => {
-    await seedDB();
+    // await seedDB();
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       // log where we can go to test our GQL API
