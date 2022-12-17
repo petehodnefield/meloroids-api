@@ -8,7 +8,7 @@ const { authMiddleware } = require("./utils/auth");
 const db = require("./config/connection");
 const seedDB = require("./seeds/seeds");
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 // create a new Apollo server and pass in our schema data
 const server = new ApolloServer({
   typeDefs,
@@ -43,7 +43,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   });
   console.log(path.join(__dirname, "../frontend/build/index.html"));
   db.once("open", async () => {
-    // await seedDB();
+    await seedDB();
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       // log where we can go to test our GQL API
