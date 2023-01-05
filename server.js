@@ -42,7 +42,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
     res.sendFile(path.join(__dirname, "./index.html"));
   });
   db.once("open", async () => {
-    // await seedDB();
+    await seedDB();
     app.listen(PORT, () => {
       console.log(`API server running on port ${PORT}!`);
       // log where we can go to test our GQL API
@@ -51,7 +51,6 @@ const startApolloServer = async (typeDefs, resolvers) => {
       );
     });
   });
-  console.log(process.env.NODE_ENV);
 };
 
 // Call the async function to start the server
